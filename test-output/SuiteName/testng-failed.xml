@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [SuiteName]">
+  <test thread-count="5" name="PlaceOrderTest(failed)">
+    <classes>
+      <class name="com.qa.test.PlaceOrder">
+        <methods>
+          <include name="POSTAPIWithHeaders"/>
+          <include name="Setup"/>
+        </methods>
+      </class> <!-- com.qa.test.PlaceOrder -->
+    </classes>
+  </test> <!-- PlaceOrderTest(failed) -->
+  <test thread-count="5" name="TakeorderTest(failed)">
+    <classes>
+      <class name="com.qa.test.Takeorder">
+        <methods>
+          <include name="Setup"/>
+          <include name="PUTAPITAKEORDER"/>
+        </methods>
+      </class> <!-- com.qa.test.Takeorder -->
+    </classes>
+  </test> <!-- TakeorderTest(failed) -->
+</suite> <!-- Failed suite [SuiteName] -->
