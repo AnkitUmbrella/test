@@ -1,20 +1,22 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="SuiteName">
+	
+	
+	
+	<test name="PlaceOrderTest" allow-return-values="true">
+		<classes>
+			<class name="com.qa.test.PlaceOrderTest" />
+		</classes>
+	</test>
+	
+	
 	<test name="FetchOrderDetailTest" allow-return-values="true">
 		<classes>
 			<class name="com.qa.test.FetchOrderDetail" />
 		</classes>
 	</test>
 	
-	
-	<test name="PlaceOrderTest" allow-return-values="true">
-		<classes>
-			<class name="com.qa.test.PlaceOrder" />
-		</classes>
-	</test>
-	
-	
-	<test name="TakeorderTest" allow-return-values="true">
+	<!-- <test name="TakeorderTest" allow-return-values="true">
 		<classes>
 			<class name="com.qa.test.Takeorder" />
 		</classes>
@@ -32,6 +34,9 @@
 		<classes>
 			<class name="com.qa.test.CancelOrder" />
 		</classes>
-	</test>   
+	</test>    -->
+	
+	
+	
 </suite>
 

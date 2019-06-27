@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite guice-stage="DEVELOPMENT" name="Failed suite [SuiteName]">
-  <test thread-count="5" name="FetchOrderDetailTest(failed)">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [RunAll_APITest]">
+  <test thread-count="5" name="RunAll_APITest Test(failed)">
     <classes>
       <class name="com.qa.test.FetchOrderDetail">
         <methods>
@@ -9,5 +9,5 @@
         </methods>
       </class> <!-- com.qa.test.FetchOrderDetail -->
     </classes>
-  </test> <!-- FetchOrderDetailTest(failed) -->
-</suite> <!-- Failed suite [SuiteName] -->
+  </test> <!-- RunAll_APITest Test(failed) -->
+</suite> <!-- Failed suite [RunAll_APITest] -->

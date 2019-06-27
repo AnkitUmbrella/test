@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="RunAll_APITest">
+  <test name="RunAll_APITest Test" preserve-order="true">
+    <classes>
+      <class name="com.qa.test.PlaceOrderTest" />
+      <class name="com.qa.test.FetchOrderDetail" />
+      
+    </classes>
+  </test>
+</suite>
