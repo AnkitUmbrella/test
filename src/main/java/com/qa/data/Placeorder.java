@@ -1,53 +1,38 @@
   package com.qa.data;
+  import java.util.List;
 
-import java.util.List;
+        
 
-//pojo - Plain old java object equivalent to JSON
+	    public class Placeorder {
+        public List stops;
+        public String orderAt;
 
-	public class Placeorder {
+		public String getOrderAt() {
+			return orderAt;
+		}
 
-		
 
-		public List stops;
-		
+		public void setOrderAt(String orderAt) {
+			this.orderAt = orderAt;
+		}
+
 
 		public List getstops(){
-		    return this.stops;
+		return this.stops;
 		}
 		
-	
 
 		public void setstops(List stops){
-		    this.stops = stops;
+		this.stops = stops;
 		}
-		
-		
-	
-//
-//	public List getLat() {
-//			return lat;
-//		}
-//
-//		public void setLat(List lat) {
-//			this.lat = lat;
-//		}
-//
-//		public List getLng() {
-//			return lng;
-//		}
-//
-//		public void setLng(List lng) {
-//			this.lng = lng;
-//		}
-//
-//		
+			
 
-	public Placeorder() {
+	    public Placeorder() {
 			
 		}	
 
 		
 		
-	}
+	    }
 
 

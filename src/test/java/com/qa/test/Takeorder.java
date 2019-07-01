@@ -32,24 +32,24 @@ import com.qa.restclient.RestClient;
 		public String serviceurl;
 		public RestClient client;
 		public String url;
-		//public TestBase testbase;
 		public CloseableHttpResponse closableResponse;
 		public Xls_Reader xls;
-		public SoftAssert softAssert = new SoftAssert();
+		public SoftAssert softAssert;
 
-		 public Takeorder() {  // To call the testbase class methods
+	    public Takeorder() {  
 		super();
-	 }
+	    }
 		
 
 		 
 
 		  @BeforeTest
 		  public void Setup() throws ClientProtocolException, IOException {
-			  apurl= prop.getProperty("url");
-			  serviceurl= prop.getProperty("placeorderserviceurl");
-			   url= apurl + serviceurl;
-			   System.out.println(url);
+			 LoggerSetUp();
+			 apurl= prop.getProperty("url");
+			 serviceurl= prop.getProperty("placeorderserviceurl");
+			 url= apurl + serviceurl;
+			 logger.debug("Url is " +url);;
 		 
 		  }
 
@@ -58,174 +58,125 @@ import com.qa.restclient.RestClient;
 		  @Test(priority=1, expectedExceptions={com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException.class})
 				public void POSTAPIWithHeaders() throws Exception {
 				client= new RestClient();
-				 System.out.println("*************Placing Order *********************");
+				logger.debug("*************Placing Order *********************");
 				HashMap<String, String> Headers= new HashMap<String, String>();
-				Headers.put("Content-Type", "application/json"); // Adding headers in Post call
-				// Now add Payload Json data in com.qa.data
+				Headers.put("Content-Type", "application/json"); 
+				logger.debug("Adding headers and Payload Json data");
 				
 				
-				//Jackson API to convert Java object(users.java) to JSON.
+				ObjectMapper map= new ObjectMapper(); 
+	            logger.debug("Converting Object to JSON Object");
+				Placeorder jsonObject= map.readValue(new File((System.getProperty("user.dir") + "\\src\\main\\java\\com\\qa\\data\\Placeorderdata.json")),Placeorder.class);
+			    logger.debug("Json Object to JSON in String");
+				String UsersJsonstring= map.writeValueAsString(jsonObject);
 				
-				ObjectMapper map= new ObjectMapper(); // Available in Jackson Imported from Maven repo
-	     
-				//Object to JSON Object convertor
-				Placeorder jsonObject= map.readValue(new File("D:\\Projects\\workspace2019\\RestApi_Automation\\src\\main\\java\\com\\qa\\data\\Placeorderdata.json"), Placeorder.class);
+				logger.debug("Call Post method and Pass JSON payload as String with it");
+				closableResponse = client.post(url, UsersJsonstring, Headers);
 				
+				logger.debug("Validating Response from API");
+				int Statuscode= closableResponse.getStatusLine().getStatusCode();
+				logger.debug(Statuscode);
 				
-				
-				// Json Object to JSON in String
-				 String UsersJsonstring= map.writeValueAsString(jsonObject);
-				
-				
-				 
-				//Call Post method and Pass JSON payload as String with it
-				 closableResponse = client.post(url, UsersJsonstring, Headers);
-				
-				 
-				 
-				 // Validating Response from API
-				  //a. Check for validation of Status Code
-				  int Statuscode= closableResponse.getStatusLine().getStatusCode();
-		        //  Assert.assertEquals(Statuscode, RESPONSE_STATUS_CODE_201);
-		          System.out.println(Statuscode);
-				
-		 	
-			       // Getting Response String
-			  	   //b. JSON String
-			  		String ResponseString= EntityUtils.toString(closableResponse.getEntity(), "UTF-8");
-			        JSONObject responseJson= new JSONObject(ResponseString);   //Response string converted into JSON Object
-			  		System.out.println("Response JSON from API->> " +responseJson); // Output of response json
+		 	    String ResponseString= EntityUtils.toString(closableResponse.getEntity(), "UTF-8");
+			    JSONObject responseJson= new JSONObject(ResponseString);   
+			    logger.debug("Response JSON from API->> " +responseJson); 
 			  		
-			  	 //To find perpage value in JSON (Assertion in JSON data)
-			  		String id = TestUtil.getValueByJPath(responseJson, "/id");
-			  		System.out.println("Response id is: " +id);
+			    logger.debug("Extracting ID from Response JSON");
+			  	String id = TestUtil.getValueByJPath(responseJson, "/id");
+			  	logger.debug("Response id is: " +id);
 			 
-			  		Newurl= url+"/"+id;
+			  	Newurl= url+"/"+id;
 			  		
-			  		System.out.println(Newurl);
-			  		
-			  		//To validate the response and compare.
-			  		//Json to JavaObject
-			  		Placeorder usersrespobj= map.readValue(ResponseString,Placeorder.class);  //Actual User Object
+			  	logger.debug(Newurl);
+			  	logger.debug("Converting Json to JavaObject");
+			  	Placeorder usersrespobj= map.readValue(ResponseString,Placeorder.class);  //Actual User Object
 			  	
-			  		
-			  	}
+			 	}
 		
 	
 		  
-		  @Test(priority=2)
+		    @Test(priority=2)
 			public void GetAPIWithHeaders() throws Exception {
-				
-		 
-				 
-				   
-				   System.out.println("GetAPI URl " +Newurl);
-				 
+		    	logger.debug("*************Fetch Order Details *********************");
+				logger.debug("GetAPI URl is: " +Newurl);
 				client= new RestClient();
-				
 				HashMap<String, String> Headers= new HashMap<String, String>();
 				Headers.put("Content-Type", "application/json");
-				
-				
 				closableResponse = client.geturl(Newurl , Headers);
+				logger.debug("Calling Getapi");
 				
-			      System.out.println("*************Fetch Order Details *********************");
 			      
 			      
-			        //a. Status Code and (Assertion of Status Code).
-			  		int status= closableResponse.getStatusLine().getStatusCode();   // Get status code with above object
-			  		System.out.println("Status Code->> " +status);
-			  		Assert.assertEquals(status , RESPONSE_STATUS_CODE_200 , "Status code is not 200"); //Assertion
+			    int status= closableResponse.getStatusLine().getStatusCode();   
+			    logger.debug("Status Code->> " +status);
+			  	Assert.assertEquals(status , RESPONSE_STATUS_CODE_200 , "Status code is not 200"); 
 			  		
-			  		
-			       // Getting Response String
-			  		//b. JSON String
-			  		String ResponseString= EntityUtils.toString(closableResponse.getEntity(), "UTF-8");
-			  		System.out.println("Response is" +ResponseString);
-			        JSONObject responseJson= new JSONObject(ResponseString);   // Response string converted into JSON Object
-			  		System.out.println("Response JSON from API->> " +responseJson);
-			  		if(status==200) {
-			  			System.out.println("Response is OK- 200");
+			    String ResponseString= EntityUtils.toString(closableResponse.getEntity(), "UTF-8");
+			    logger.debug("Response is" +ResponseString);
+			    JSONObject responseJson= new JSONObject(ResponseString);   
+			    logger.debug("Response JSON from API->> " +responseJson);
+			  	if(status==200) {
+			  	logger.debug("Response is OK- 200");
 			  		}else
-			  			System.out.println("The order doesn’t exist. Response code " +status);
+			  	logger.debug("The order doesn’t exist. Response code " +status);
 			  		
 			  		
 			  		
-			  		//To find perpage value in JSON (Assertion in JSON data)
-			  		String currency = TestUtil.getValueByJPath(responseJson, "/fare/currency");
-			  		System.out.println("The Currency is-> " +currency);
-			  		Assert.assertEquals("HKD", currency); // Comparing values.
+			  		
+			  	String currency = TestUtil.getValueByJPath(responseJson, "/fare/currency");
+			  	logger.debug("The Currency is-> " +currency);
+			  	Assert.assertEquals("HKD", currency); // Comparing values.
 			  		
 			  		
-			  		UpdatedURL=Newurl+""+"/take";
-			  		//c. All Headers
-			  		Header[] headersArray= closableResponse.getAllHeaders();  // Getting all Header from response and stored it into hashmap
-			  		HashMap<String,String> allheaders= new HashMap<String,String>();
-			  		for(Header header : headersArray ) {
-			  		allheaders.put(header.getName(),header.getValue());
+			  	UpdatedURL=Newurl+""+"/take";
+			  	Header[] headersArray= closableResponse.getAllHeaders();  // Getting all Header from response and stored it into hashmap
+			  	HashMap<String,String> allheaders= new HashMap<String,String>();
+			  	for(Header header : headersArray ) {
+			  	allheaders.put(header.getName(),header.getValue());
 			  		
-			  		}
+			  	}
 			  		
-			  		System.out.println("Headers Array->> " +allheaders);
+			  	logger.debug("Headers Array->> " +allheaders);
 			  
 			  	}
 			
 	
 	
 			
-			@Test(priority=3,expectedExceptions={org.testng.TestException.class})
-			public void PUTAPITAKEORDER() throws ClientProtocolException, IOException,Exception {
-				
-			 	
+			 @Test(priority=3)
+			  public void PUTAPITAKEORDER() throws ClientProtocolException, IOException, org.testng.TestException{
 				client= new RestClient();
-				
-				 System.out.println("*************Take Order *********************");
+				logger.debug("*************Take Order *********************");
 				HashMap<String, String> Headers= new HashMap<String, String>();
 				Headers.put("Content-Type", "application/json");
-				System.out.println(UpdatedURL);
-				
+				logger.debug(UpdatedURL);
 				closableResponse = client.Put(UpdatedURL, Headers);
 			      
-			      
-			        //a. Status Code and (Assertion of Status Code).
-			  		int status= closableResponse.getStatusLine().getStatusCode();   // Get status code with above object
-			  		System.out.println("Status Code->> " +status);
-			  		softAssert.assertEquals(status , RESPONSE_STATUS_CODE_200 , "Status code is not 200"); //Assertion
+			    int status= closableResponse.getStatusLine().getStatusCode();   
+			    logger.debug("Status Code->> " +status); 
 			  		if(status==422){
-			  			System.out.println("Logic flow is violated");
+			  	    logger.debug("Logic flow is violated");
 			  			
 			  		}else if(status==404){
-			  			System.out.println("The order doesn’t exist");
+			  	    logger.debug("The order doesn’t exist");
 			  		} 
-			  			else {
-			  			System.out.println(" Response code " +status);
+			  	     else{
+			  	    logger.debug(" Response code " +status);
 			  		
 			  		}
-			  			
-			  			
-			       // Getting Response String
-			  		//b. JSON String
+			  		
 			  		String ResponseString= EntityUtils.toString(closableResponse.getEntity(), "UTF-8");
-			        JSONObject responseJson= new JSONObject(ResponseString);   // Response string converted into JSON Object
-			  		System.out.println("Response JSON from API->> " +responseJson);
+			        JSONObject responseJson= new JSONObject(ResponseString);   
+			        logger.debug("Response JSON from API->> " +responseJson);
 			  		
-			  		
-			  		//To find perpage value in JSON (Assertion in JSON data)
+			  	
 			  		String responsejsonstatus = TestUtil.getValueByJPath(responseJson, "/status");
-			  		System.out.println("The status is-> " +status);
-			  		Assert.assertEquals(responsejsonstatus, "ONGOING"); // Comparing
+			  		logger.debug("The status is-> " +responsejsonstatus);
+			        }
+	                }
 			  		
 			  		
 			  		
-			  		
-			  	}
-				  	  
-			
-			
-			
-			
-			}
-	
-			
+			  	
 
 

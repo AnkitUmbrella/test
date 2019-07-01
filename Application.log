@@ -1,0 +1,66 @@
+01/07/2019 14:40:46 devpinoyLogger Setting up URL for Fetching Ordershttp://localhost:51544/v1/orders/1
+01/07/2019 14:40:46 devpinoyLogger Url for PostAPI http://localhost:51544/v1/orders
+01/07/2019 14:40:46 devpinoyLogger Url is http://localhost:51544/v1/orders
+01/07/2019 14:40:46 devpinoyLogger *************Placing Order *********************
+01/07/2019 14:40:46 devpinoyLogger Converting Json Object to JSON in String
+01/07/2019 14:40:46 devpinoyLogger Calling Post method and Pass JSON payload as String with it
+01/07/2019 14:40:48 devpinoyLogger Validating Response from API
+01/07/2019 14:40:48 devpinoyLogger Status is 201
+01/07/2019 14:40:48 devpinoyLogger Response JSON from API->> {"fare":{"amount":"312.02","currency":"HKD"},"id":27,"drivingDistancesInMeters":[10600,3081]}
+01/07/2019 14:40:48 devpinoyLogger Extracting ID from JSON
+01/07/2019 14:40:48 devpinoyLogger Response id is: 27
+01/07/2019 14:40:48 devpinoyLogger Json to JavaObject
+01/07/2019 14:40:48 devpinoyLogger Initializing RestClient
+01/07/2019 14:40:48 devpinoyLogger Adding Headers
+01/07/2019 14:40:48 devpinoyLogger Calling get method
+01/07/2019 14:40:48 devpinoyLogger Response code 200
+01/07/2019 14:40:48 devpinoyLogger Response JSON from API->> {"orderDateTime":"2019-07-01T05:21:38Z","fare":{"amount":"312.02","currency":"HKD"},"createdTime":"2019-07-01T05:21:38Z","id":1,"stops":[{"lng":114.124651,"lat":22.344674},{"lng":114.182446,"lat":22.375384},{"lng":114.186962,"lat":22.385669}],"drivingDistancesInMeters":[10600,3081],"status":"ASSIGNING"}
+01/07/2019 14:40:48 devpinoyLogger Verifying Response
+01/07/2019 14:40:48 devpinoyLogger Headers Array->> {Content-Length=305, Date=Mon, 01 Jul 2019 09:10:48 GMT, Content-Type=application/json; charset=utf-8}
+01/07/2019 14:40:48 devpinoyLogger *************Placing Order *********************
+01/07/2019 14:40:48 devpinoyLogger Adding headers and Payload Json data
+01/07/2019 14:40:48 devpinoyLogger Converting Object to JSON Object
+01/07/2019 14:40:48 devpinoyLogger Json Object to JSON in String
+01/07/2019 14:40:48 devpinoyLogger Call Post method and Pass JSON payload as String with it
+01/07/2019 14:40:48 devpinoyLogger Validating Response from API
+01/07/2019 14:40:48 devpinoyLogger 201
+01/07/2019 14:40:48 devpinoyLogger Response JSON from API->> {"fare":{"amount":"312.02","currency":"HKD"},"id":28,"drivingDistancesInMeters":[10600,3081]}
+01/07/2019 14:40:48 devpinoyLogger Extracting ID from Response JSON
+01/07/2019 14:40:48 devpinoyLogger Response id is: 28
+01/07/2019 14:40:48 devpinoyLogger http://localhost:51544/v1/orders/28
+01/07/2019 14:40:48 devpinoyLogger Converting Json to JavaObject
+01/07/2019 14:40:48 devpinoyLogger *************Placing Order *********************
+01/07/2019 14:40:48 devpinoyLogger Json Object to JSON in String
+01/07/2019 14:40:48 devpinoyLogger Validating Response from API
+01/07/2019 14:40:48 devpinoyLogger Status Code is: 201
+01/07/2019 14:40:48 devpinoyLogger Response JSON from API->> {"fare":{"amount":"312.02","currency":"HKD"},"id":29,"drivingDistancesInMeters":[10600,3081]}
+01/07/2019 14:40:48 devpinoyLogger Response id is: 29
+01/07/2019 14:40:48 devpinoyLogger http://localhost:51544/v1/orders/29
+01/07/2019 14:40:48 devpinoyLogger *************Placing Order *********************
+01/07/2019 14:40:48 devpinoyLogger url
+01/07/2019 14:40:48 devpinoyLogger 201
+01/07/2019 14:40:48 devpinoyLogger Response JSON from API->> {"fare":{"amount":"312.02","currency":"HKD"},"id":30,"drivingDistancesInMeters":[10600,3081]}
+01/07/2019 14:40:48 devpinoyLogger Response id is: 30
+01/07/2019 14:40:48 devpinoyLogger http://localhost:51544/v1/orders/30
+01/07/2019 14:40:48 devpinoyLogger Calling GetAPI against POSTAPI IDhttp://localhost:51544/v1/orders/27
+01/07/2019 14:40:48 devpinoyLogger Initializing RestClient and Adding Headers
+01/07/2019 14:40:48 devpinoyLogger *************Fetch Order Details *********************
+01/07/2019 14:40:48 devpinoyLogger Status Code->> 200
+01/07/2019 14:40:48 devpinoyLogger Response is{"id":27,"stops":[{"lat":22.344674,"lng":114.124651},{"lat":22.375384,"lng":114.182446},{"lat":22.385669,"lng":114.186962}],"drivingDistancesInMeters":[10600,3081],"fare":{"amount":"312.02","currency":"HKD"},"status":"ASSIGNING","orderDateTime":"2019-09-03T13:00:00Z","createdTime":"2019-07-01T09:10:47Z"}
+
+01/07/2019 14:40:48 devpinoyLogger Response JSON from API->> {"orderDateTime":"2019-09-03T13:00:00Z","fare":{"amount":"312.02","currency":"HKD"},"createdTime":"2019-07-01T09:10:47Z","id":27,"stops":[{"lng":114.124651,"lat":22.344674},{"lng":114.182446,"lat":22.375384},{"lng":114.186962,"lat":22.385669}],"drivingDistancesInMeters":[10600,3081],"status":"ASSIGNING"}
+01/07/2019 14:40:48 devpinoyLogger Response is OK- 200
+01/07/2019 14:40:48 devpinoyLogger Extracting currency from Response JSON
+01/07/2019 14:40:48 devpinoyLogger The Currency is-> HKD
+01/07/2019 14:40:48 devpinoyLogger Getting all Header from response and stored it into hashmap
+01/07/2019 14:40:48 devpinoyLogger Headers Array->> {Content-Length=306, Date=Mon, 01 Jul 2019 09:10:48 GMT, Content-Type=application/json; charset=utf-8}
+01/07/2019 14:40:48 devpinoyLogger *************Fetch Order Details *********************
+01/07/2019 14:40:48 devpinoyLogger GetAPI URl is: http://localhost:51544/v1/orders/28
+01/07/2019 14:40:48 devpinoyLogger Calling Getapi
+01/07/2019 14:40:48 devpinoyLogger Status Code->> 200
+01/07/2019 14:40:48 devpinoyLogger Response is{"id":28,"stops":[{"lat":22.344674,"lng":114.124651},{"lat":22.375384,"lng":114.182446},{"lat":22.385669,"lng":114.186962}],"drivingDistancesInMeters":[10600,3081],"fare":{"amount":"312.02","currency":"HKD"},"status":"ASSIGNING","orderDateTime":"2019-07-01T09:10:48Z","createdTime":"2019-07-01T09:10:48Z"}
+
+01/07/2019 14:40:48 devpinoyLogger Response JSON from API->> {"orderDateTime":"2019-07-01T09:10:48Z","fare":{"amount":"312.02","currency":"HKD"},"createdTime":"2019-07-01T09:10:48Z","id":28,"stops":[{"lng":114.124651,"lat":22.344674},{"lng":114.182446,"lat":22.375384},{"lng":114.186962,"lat":22.385669}],"drivingDistancesInMeters":[10600,3081],"status":"ASSIGNING"}
+01/07/2019 14:40:48 devpinoyLogger Response is OK- 200
+01/07/2019 14:40:48 devpinoyLogger The Currency is-> HKD
+01/07/2019 14:40:48 devpinoyLogger Headers Array->> {Content-Length=306, Date=Mon, 01 Jul 2019 09:10:48 GMT, Content-Type=application/json; charset=utf-8}
